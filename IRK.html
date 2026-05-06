@@ -43,7 +43,7 @@ footer{text-align:center;padding:16px;font-size:11px;color:var(--muted)}
 <body>
 <header>
 <h1>USOS Dokumentacja — IRK</h1>
-<p>Ostatnia aktualizacja: 2026-05-06 13:11</p>
+<p>Ostatnia aktualizacja: 2026-05-06 13:34</p>
 </header>
 <div class="toolbar">
 <div class="search-wrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="search" type="search" placeholder="Szukaj dokumentu..." autocomplete="off"></div>
@@ -62,14 +62,14 @@ footer{text-align:center;padding:16px;font-size:11px;color:var(--muted)}
 <th data-col="5">Użytkownik</th>
 </tr></thead>
 <tbody id="tbody">
-<tr data-tag="IRK" data-user="Kandydaci" data-aktual="Aktualny"><td><a href="https://drive.google.com/file/d/1l9Lq3UhDSMc_eYPk_l0E9H8GJ2w_spj5/view" target="_blank" rel="noopener">Katalog studiów. Rekruter</a></td><td></td><td>Katalog Studiów 1.2.2, USOS 6.7.2</td><td>2.43 MB</td><td><span class="badge badge-sys">IRK</span></td><td><span class="badge badge-user">Kandydaci</span></td></tr>
-<tr data-tag="IRK" data-user="Kandydaci" data-aktual="Aktualny"><td><a href="https://drive.google.com/file/d/1wfHSeZ4yzOJPwtAbvhLkuaMAGZNp8pZG/view" target="_blank" rel="noopener">Katalog studiów. Administracja</a></td><td></td><td>Katalog Studiów 1.2.2, USOS 6.7.2</td><td>4.02 MB</td><td><span class="badge badge-sys">IRK</span></td><td><span class="badge badge-user">Kandydaci</span></td></tr>
-<tr data-tag="IRK" data-user="Kandydaci" data-aktual="Aktualny"><td><a href="https://drive.google.com/file/d/1UxVxxPpz1ginf9kNnGqvnOAfoqkqJsu3/view" target="_blank" rel="noopener">Katalog studiów. Użytkownik biznesowy</a></td><td></td><td>Katalog Studiów 1.2.2, USOS 6.7.2</td><td>6.7 MB</td><td><span class="badge badge-sys">IRK</span></td><td><span class="badge badge-user">Kandydaci</span></td></tr>
+<tr data-tag="IRK" data-user="Kandydaci"><td><a href="https://drive.google.com/file/d/1l9Lq3UhDSMc_eYPk_l0E9H8GJ2w_spj5/view" target="_blank" rel="noopener">Katalog studiów. Rekruter</a></td><td data-sort="2020-12-19">2020-12-19</td><td>Katalog Studiów 1.2.2, USOS 6.7.2</td><td data-sort="2548039.68">2.43 MB</td><td><span class="badge badge-sys">IRK</span></td><td><span class="badge badge-user">Kandydaci</span></td></tr>
+<tr data-tag="IRK" data-user="Kandydaci"><td><a href="https://drive.google.com/file/d/1wfHSeZ4yzOJPwtAbvhLkuaMAGZNp8pZG/view" target="_blank" rel="noopener">Katalog studiów. Administracja</a></td><td data-sort="2020-12-19">2020-12-19</td><td>Katalog Studiów 1.2.2, USOS 6.7.2</td><td data-sort="4215275.52">4.02 MB</td><td><span class="badge badge-sys">IRK</span></td><td><span class="badge badge-user">Kandydaci</span></td></tr>
+<tr data-tag="IRK" data-user="Kandydaci"><td><a href="https://drive.google.com/file/d/1UxVxxPpz1ginf9kNnGqvnOAfoqkqJsu3/view" target="_blank" rel="noopener">Katalog studiów. Użytkownik biznesowy</a></td><td data-sort="2020-12-19">2020-12-19</td><td>Katalog Studiów 1.2.2, USOS 6.7.2</td><td data-sort="7025459.2">6.7 MB</td><td><span class="badge badge-sys">IRK</span></td><td><span class="badge badge-user">Kandydaci</span></td></tr>
 </tbody>
 </table>
 <p class="empty" id="empty" style="display:none">Brak wyników dla wybranych filtrów.</p>
 </div>
-<footer>USOS Dokumentacja · Dane pobierane automatycznie z usos.edu.pl · 2026-05-06 13:11</footer>
+<footer>USOS Dokumentacja · Dane pobierane automatycznie z usos.edu.pl · 2026-05-06 13:34</footer>
 <script>
 (function(){
 var rows=[].slice.call(document.querySelectorAll("#tbody tr"));
@@ -95,8 +95,11 @@ document.querySelectorAll("th[data-col]").forEach(function(th){
     var tbody=document.getElementById("tbody");
     var arr=[].slice.call(tbody.querySelectorAll("tr"));
     arr.sort(function(a,b){
-      var av=a.cells[col]?a.cells[col].textContent.trim():"";
-      var bv=b.cells[col]?b.cells[col].textContent.trim():"";
+      var ac=a.cells[col],bc=b.cells[col];
+      var av=ac?(ac.dataset.sort||ac.textContent.trim()):"";
+      var bv=bc?(bc.dataset.sort||bc.textContent.trim()):"";
+      var an=parseFloat(av),bn=parseFloat(bv);
+      if(!isNaN(an)&&!isNaN(bn)) return (an-bn)*sortDir;
       return av.localeCompare(bv,"pl")*sortDir;
     });
     arr.forEach(function(r){tbody.appendChild(r);});
