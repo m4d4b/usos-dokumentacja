@@ -10,7 +10,7 @@
 <header>
 <h1>USOS Dokumentacja — Wszystkie dokumenty</h1>
 <p>Dokumentacja jest własnością MUCI, wszelkie prawa zastrzeżone.</p>
-<p style="opacity:.6;font-size:11px;margin-top:2px">Ostatnia aktualizacja: 2026-05-06 15:52</p>
+<p style="opacity:.6;font-size:11px;margin-top:2px">Ostatnia aktualizacja: 2026-05-06 18:30</p>
 </header>
 <div class="toolbar">
 <div class="search-wrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="search" type="search" placeholder="Szukaj dokumentu..." autocomplete="off"></div>
@@ -157,7 +157,7 @@
 </table>
 <p class="empty" id="empty" style="display:none">Brak wyników dla wybranych filtrów.</p>
 </div>
-<footer>USOS Dokumentacja · Dane pobierane automatycznie z usos.edu.pl · 2026-05-06 15:52</footer>
+<footer>USOS Dokumentacja · Dane pobierane automatycznie z usos.edu.pl · 2026-05-06 18:30</footer>
 <script>(function(){var rows=[].slice.call(document.querySelectorAll("#tbody tr"));var search=document.getElementById("search");var fSys=document.getElementById("filterSys");var fUser=document.getElementById("filterUser");var count=document.getElementById("count");var empty=document.getElementById("empty");var tbl=document.getElementById("tbl");var sys={},usr={};rows.forEach(function(r){sys[r.dataset.tag]=1;usr[r.dataset.user]=1;});Object.keys(sys).sort().forEach(function(v){if(v){var o=document.createElement("option");o.value=v;o.text=v;fSys.appendChild(o);}});Object.keys(usr).sort().forEach(function(v){if(v){var o=document.createElement("option");o.value=v;o.text=v;fUser.appendChild(o);}});var sortCol=-1,sortDir=1;document.querySelectorAll("th[data-col]").forEach(function(th){  th.addEventListener("click",function(){    var col=+this.dataset.col;    if(sortCol===col){sortDir*=-1;}else{sortCol=col;sortDir=1;}    document.querySelectorAll("th").forEach(function(h){h.classList.remove("sort-asc","sort-desc");});    this.classList.add(sortDir===1?"sort-asc":"sort-desc");    var tbody=document.getElementById("tbody");    [].slice.call(tbody.querySelectorAll("tr")).sort(function(a,b){      var ac=a.cells[col],bc=b.cells[col];      var av=ac?(ac.dataset.sort||ac.textContent.trim()):"";      var bv=bc?(bc.dataset.sort||bc.textContent.trim()):"";      var an=parseFloat(av),bn=parseFloat(bv);      return (!isNaN(an)&&!isNaN(bn)?(an-bn):av.localeCompare(bv,"pl"))*sortDir;    }).forEach(function(r){tbody.appendChild(r);});    filter();  });});function filter(){  var q=search.value.toLowerCase(),s=fSys.value,u=fUser.value,vis=0;  rows=[].slice.call(document.querySelectorAll("#tbody tr"));  rows.forEach(function(r){    var ok=(!q||r.textContent.toLowerCase().indexOf(q)!==-1)&&(!s||r.dataset.tag===s)&&(!u||r.dataset.user===u);    r.classList.toggle("hidden",!ok);    if(ok)vis++;  });  count.textContent=vis+" z "+rows.length+" dokumentów";  empty.style.display=vis===0?"block":"none";  tbl.style.display=vis===0?"none":"";}search.addEventListener("input",filter);fSys.addEventListener("change",filter);fUser.addEventListener("change",filter);filter();})();</script>
 </body>
 </html>
