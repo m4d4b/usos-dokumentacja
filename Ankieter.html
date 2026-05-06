@@ -43,7 +43,7 @@ footer{text-align:center;padding:16px;font-size:11px;color:var(--muted)}
 <body>
 <header>
 <h1>USOS Dokumentacja — Ankieter</h1>
-<p>Ostatnia aktualizacja: 2026-05-06 13:11</p>
+<p>Ostatnia aktualizacja: 2026-05-06 13:34</p>
 </header>
 <div class="toolbar">
 <div class="search-wrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="search" type="search" placeholder="Szukaj dokumentu..." autocomplete="off"></div>
@@ -62,14 +62,14 @@ footer{text-align:center;padding:16px;font-size:11px;color:var(--muted)}
 <th data-col="5">Użytkownik</th>
 </tr></thead>
 <tbody id="tbody">
-<tr data-tag="Ankieter" data-user="Inne osoby" data-aktual="Aktualny"><td><a href="https://drive.google.com/file/d/1VAuDsoXaqjTQeAgApdbnsKRzrkH3ZqE4/view" target="_blank" rel="noopener">Ankieter. Przewodnik po serwisie</a></td><td></td><td></td><td>2.24 MB</td><td><span class="badge badge-sys">Ankieter</span></td><td><span class="badge badge-user">Inne osoby</span></td></tr>
-<tr data-tag="Ankieter" data-user="Inne osoby" data-aktual="Aktualny"><td><a href="https://drive.google.com/file/d/1ZgzjPe8HPRuntcVPeHTMPMs0iCzs_SaQ/view" target="_blank" rel="noopener">Ankiety w USOSadm i USOSweb</a></td><td></td><td></td><td>6.49 MB</td><td><span class="badge badge-sys">Ankieter</span></td><td><span class="badge badge-user">Inne osoby</span></td></tr>
-<tr data-tag="Ankieter" data-user="Inne osoby" data-aktual="Aktualny"><td><a href="https://drive.google.com/file/d/1uZdhGFP8aviBtFk0CikoR0f8yduGUwWp/view" target="_blank" rel="noopener">Raporty tekstowe eksportujące wyniki ankiet</a></td><td></td><td>4.0</td><td>489.5 KB</td><td><span class="badge badge-sys">Ankieter</span></td><td><span class="badge badge-user">Inne osoby</span></td></tr>
+<tr data-tag="Ankieter" data-user="Inne osoby"><td><a href="https://drive.google.com/file/d/1VAuDsoXaqjTQeAgApdbnsKRzrkH3ZqE4/view" target="_blank" rel="noopener">Ankieter. Przewodnik po serwisie</a></td><td data-sort="2014-04-10">2014-04-10</td><td></td><td data-sort="2348810.24">2.24 MB</td><td><span class="badge badge-sys">Ankieter</span></td><td><span class="badge badge-user">Inne osoby</span></td></tr>
+<tr data-tag="Ankieter" data-user="Inne osoby"><td><a href="https://drive.google.com/file/d/1ZgzjPe8HPRuntcVPeHTMPMs0iCzs_SaQ/view" target="_blank" rel="noopener">Ankiety w USOSadm i USOSweb</a></td><td data-sort="2009-07-28">2009-07-28</td><td></td><td data-sort="6805258.24">6.49 MB</td><td><span class="badge badge-sys">Ankieter</span></td><td><span class="badge badge-user">Inne osoby</span></td></tr>
+<tr data-tag="Ankieter" data-user="Inne osoby"><td><a href="https://drive.google.com/file/d/1uZdhGFP8aviBtFk0CikoR0f8yduGUwWp/view" target="_blank" rel="noopener">Raporty tekstowe eksportujące wyniki ankiet</a></td><td data-sort="2009-05-15">2009-05-15</td><td>4.0</td><td data-sort="501248">489.5 KB</td><td><span class="badge badge-sys">Ankieter</span></td><td><span class="badge badge-user">Inne osoby</span></td></tr>
 </tbody>
 </table>
 <p class="empty" id="empty" style="display:none">Brak wyników dla wybranych filtrów.</p>
 </div>
-<footer>USOS Dokumentacja · Dane pobierane automatycznie z usos.edu.pl · 2026-05-06 13:11</footer>
+<footer>USOS Dokumentacja · Dane pobierane automatycznie z usos.edu.pl · 2026-05-06 13:34</footer>
 <script>
 (function(){
 var rows=[].slice.call(document.querySelectorAll("#tbody tr"));
@@ -95,8 +95,11 @@ document.querySelectorAll("th[data-col]").forEach(function(th){
     var tbody=document.getElementById("tbody");
     var arr=[].slice.call(tbody.querySelectorAll("tr"));
     arr.sort(function(a,b){
-      var av=a.cells[col]?a.cells[col].textContent.trim():"";
-      var bv=b.cells[col]?b.cells[col].textContent.trim():"";
+      var ac=a.cells[col],bc=b.cells[col];
+      var av=ac?(ac.dataset.sort||ac.textContent.trim()):"";
+      var bv=bc?(bc.dataset.sort||bc.textContent.trim()):"";
+      var an=parseFloat(av),bn=parseFloat(bv);
+      if(!isNaN(an)&&!isNaN(bn)) return (an-bn)*sortDir;
       return av.localeCompare(bv,"pl")*sortDir;
     });
     arr.forEach(function(r){tbody.appendChild(r);});
